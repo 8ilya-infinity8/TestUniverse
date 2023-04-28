@@ -1,0 +1,90 @@
+td.title {
+    background-image: linear-gradient(180deg, #2af598 0%, #009efd 100%);
+    align: "center";
+    font-size: 14pt;
+    padding: 5px;
+}
+td.ordinary {
+    background-color: #7BF9B9;
+    align: "center";
+    font-size: 14pt;
+    padding: 5px;
+}
+table {
+    border-collapse: separate;
+    border: 3px solid #ddd;
+    border-radius: 8px;
+    border-spacing: 0px;
+    align: "center";
+}
+h4 {
+    color: #cccccc;
+    padding: 20px;
+}
+p {
+    font-size: 14pt;
+    line-height: 30px;
+}
+.topnav {
+  overflow: hidden;
+  align: "center";
+}
+nav {
+    background-color: #9FEACA;
+    color: #1FAD93;
+}
+body {
+    background-color: #C8EFDE;
+}
+
+th, td {
+    padding: 5px 5px 5px 5px;
+    text-align: left;
+    vertical-align: top;
+    border-left: 2px solid #ddd;
+}
+
+form.complete_form {
+    background-image: linear-gradient(180deg, #2af598 0%, #009efd 100%);
+    border: 2px solid green;
+    margin-bottom:30px;
+    margin-top:80px;
+    margin-left: auto;
+    margin-right: auto;
+    width:580px;
+    padding: 12px;
+    border-radius: 32px;
+}
+
+h2.profile_h2 {
+    background-color: #7BF9B9;
+    border-radius: 12px;
+    color: #248a69;
+    margin-bottom: 26px;
+    line-height: 1.6;
+    padding: 6px;
+}
+
+a.navbar-brand {
+    background-color: #C8EFDE;
+    border-radius: 10px;
+    padding: 6px;
+}
+
+a.link-1 {
+    color: black;
+}
+
+div.div-create {
+    display:flex;
+    flex-direction:row;
+    line-height:30px;
+}
+
+h3.h3-complete {
+    border-radius:10px;
+    background-color:#7BF9B9;
+    font-size:20pt;
+    color:#248a69;
+    padding: 6px;
+}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<meta charset="UTF-8">
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    {{ form.csrf_token }}
+        <div align="center">
+            {% if current_user.is_authenticated %}
+            <a href="create_test" class="btn btn-secondary" style="margin-bottom:3px">Создать тест</a>
+            {% endif %}
+            {{ form.search(style="width:400px;display:inline;line-height:32px") }}
+            {{ form.submit(type="submit", style="width:90px;display:inline;margin-bottom:3px", class="btn btn-info btn-block") }}
+        </div><br>
+</form>
+<h2 align="center" style="margin-bottom:20px;color:#248a69">Найденные тесты</h2>
+{% for test in tests %}
+<div class="table">
+    <table class="my_table" width="1100px">
+        <tr class="my_row">
+            <td class="title">Тема теста</td>
+            <td class="title">Автор</td>
+            <td class="title" align="center">Длительность</td>
+            <td class="title" align="center">Кол-во вопросов</td>
+        </tr>
+        <tr class="my_row">
+            <td class="ordinary"><a class="link-1" href="/complete_test/{{ test.id }}">{{ test.title }}</a></td>
+            <td class="ordinary"><a class="link-1" href="/profile/{{ names[test.creator] }}">{{ names[test.creator] }}</a></td>
+            <td class="ordinary" align="center">{{ test.duration }} минут</td>
+            <td class="ordinary" align="center">{{ test.size }}</td>
+        </tr>
+    </table>
+    {% if current_user.is_authenticated and current_user.id == 1 %}
+    <div>
+        <a href="/edit_test/{{ test.id }}" class="btn btn-warning" style="width:548px">
+            редактировать тест
+        </a>
+        <a href="/delete_test/{{ test.id }}" class="btn btn-danger" style="width:548px">
+            удалить тест
+        </a>
+    </div>
+    {% endif %}
+</div>
+<br>
+{% endfor %}
+{% if tests.count() < 1 %}
+<p style="font-size:22pt;margin-top:30px">Ничего не найдено :(</p>
+{% endif %}
+
+{% endblock %}

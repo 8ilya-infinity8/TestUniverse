@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script> window.location.hash="the_point"; </script>
+    <h2 align="center">Тест на тему "{{ title }}"</h2><br>
+    <div>
+        <h3 class="h3-complete" style="float:left;margin-left:50px">Вопросов в тесте: {{ size }}</h3>
+        <h3 class="h3-complete" style="float:right">Продолжительность (минуты): {{ duration }}</h3>
+    </div>
+    <form class="complete_form" action="" method="post" align="center">
+        {{ form.hidden_tag() }}
+        <p style="font-size:18pt;line-height:38px;text-align:left;width=200px">
+            {% for q in form.questions %}
+            №{{ loop.index }}) {{ q.title }}<br>
+                {% for v in q.variants %}
+                {{ v(type="radio", class="form-check-input", style="margin-left:6px;margin-top:16px") }} <a style="margin-left:24px">{{ v.label }}</a><br>
+                {% endfor %}
+            <br>
+            {% endfor %}
+        {% if form.questions.errors %}
+        <p class="alert alert-danger" role="alert">
+            Некорректные введенные данные
+        </p>
+        {% endif %}
+        </p>
+        <p>{{ form.submit(type="submit", class="btn btn-dark", style="font-size:20pt;width:180px") }}</p>
+        {% if result != -1 %}
+        <a name="the_point"></a>
+        {% set clr = "#006400" %}
+        {% if percents < 65 %}
+        {% set clr = "red" %}
+        {% endif %}
+        <div style="font-size:28pt;color:{{ clr }};margin-bottom:18px;margin-top:20px">
+            Ваш результат {{ result }} из {{ size }} баллов!<br>
+            Это {{ percents }} % правильных ответов!
+        </div>
+        {% endif %}
+        <div>{{ message }}</div>
+    </form>
+{% endblock %}

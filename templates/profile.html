@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 align="center">Профиль пользователя</h1><br>
+    <h2 class="profile_h2">
+        никнейм: {{ nick }}<br>
+        о пользователе: {{ about }}
+    </h2>
+    {% if current_user.name == nick %}
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <h3>Смена пароля</h3>
+        <p>
+            <a style="color: red">{{ form.cur_password.label }}</a><br>
+            {{ form.cur_password(class="form-control", style="width:240px;display:inline", type="password") }}
+        </p>
+        <p>
+            <a style="color: green">{{ form.new_password.label }}</a><br>
+            {{ form.new_password(class="form-control", style="width:240px;display:inline", type="password") }}
+        </p>
+        <div>{{ message }}</div>
+        <p>{{ form.submit(type="submit", class="btn btn-primary", style="width:240px") }}</p><br>
+    </form>
+    <a href="/logout" class="btn btn-danger">выйти из аккаунта</a>
+    {% endif %}
+    <h2 style="color:#248a69;padding-top:20px">тесты пользователя:</h2>
+    {% for test in tests %}
+    <div class="table_container" style>
+    <table class="my_table" width="1100px">
+        <tr class="my_row">
+            <td class="title">Тема теста</td>
+            <td class="title">Автор</td>
+            <td class="title" align="center">Длительность</td>
+            <td class="title" align="center">Кол-во вопросов</td>
+        </tr>
+        <tr class="my_row">
+            <td class="ordinary"><a class="link-1" href="/complete_test/{{ test.id }}">{{ test.title }}</a></td>
+            <td class="ordinary">{{ nick }}</td>
+            <td class="ordinary" align="center">{{ test.duration }} минут</td>
+            <td class="ordinary" align="center">{{ test.size }}</td>
+        </tr>
+    </table>
+    {% if current_user.is_authenticated and (current_user.id == 1 or current_user.id == test.creator) %}
+    <div>
+        <a href="/edit_test/{{ test.id }}" class="btn btn-warning" style="width:548px">
+            edit test
+        </a>
+        <a href="/delete_test/{{ test.id }}" class="btn btn-danger" style="width:548px">
+            delete test
+        </a>
+    </div>
+    {% endif %}
+    </div>
+    <br>
+    {% endfor %}
+    {% if tests.count() < 1 %}
+    <p style="font-size:22pt;margin-top:30px">Ничего не найдено :(</p>
+    {% endif %}
+{% endblock %}

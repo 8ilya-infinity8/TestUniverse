@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script> window.location.hash="the_point"; </script>
+<h1 align="center" style="margin-bottom:36px">{{ title }}</h1>
+
+<form action="" method="post" style="margin-left:100px">
+    {{ form.hidden_tag() }}
+    {{ form.csrf_token }}
+    <div class="div-create">
+        <p style="font-size:18pt;margin-right:10px">{{ form.title.label }}</p>
+        {{ form.title(class="form-control", style="width:700px") }}
+    </div>
+    <div class="div-create">
+        <p style="font-size:18pt;margin-right:16px">{{ form.duration.label }}</p>
+        {{ form.duration(class="form-control", style="width:80px") }}
+    </div>
+    <p style="line-height:44px">
+        {% for l in form.tests %}
+        {{ loop.index }}) {{ l.form.title.label }}
+        {{ l.form.title(style="line-height:30px;width:360px") }}<br>
+        {% if flag == loop.index0 %}
+        <a name="the_point"></a>
+        {% endif %}
+            {% for k in l.form.answers %}
+            {{ loop.index }} {{ k.form.ans(style="line-height:30px;width:280px") }}<br>
+            {% endfor %}
+        {{ l.form.add_ans(type="submit", style="display:inline", class="btn btn-light") }}
+        {{ l.form.remove_ans(type="submit", class="btn btn-danger") }}<br>
+        {% endfor %}
+        {% if flag == -1 %}
+        <a name="the_point"></a>
+        {% endif %}
+    </p>
+    <p>
+        {{ form.add(type="submit", style="display:inline", class="btn btn-dark") }}
+        {{ form.remove(type="submit", class="btn btn-danger") }}
+    </p>
+    <div class="div-create">
+        <p style="font-size:18pt;margin-right:10px">{{ form.key.label }}</p>
+        {{ form.key(class="form-control", style="width:500px") }}<br>
+    </div>
+    <p align="center">{{ form.submit(type="submit", class="btn btn-success", style="width:500px;margin-top:16px") }}</p>
+    <p style="font-size:24pt;color:red;margin-bottom:50px">{{message}}</p>
+</form>
+{% endblock %}

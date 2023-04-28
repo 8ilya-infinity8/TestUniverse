@@ -1,0 +1,9 @@
+flask
+flask_wtf
+flask_restful
+flask_login
+sqlalchemy
+datetime
+sqlalchemy_serializer
+werkzeug
+wtforms
